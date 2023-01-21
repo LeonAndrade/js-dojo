@@ -34,7 +34,7 @@
         <kbd>L</kbd>
     </div>
     <div data-key="186" class="key">
-        <kbd>;</kbd>
+      <kbd>;</kbd>
     </div>
 
     <audio data-key="65" src="sounds/boom.wav"></audio>
@@ -51,8 +51,8 @@
   <script>
 
     function removeTransition(e) {
-      this.classList.remove('playing')
-    }
+      this.classList.remove('playing');
+    };
     
     function playSound(e) {
       
@@ -79,9 +79,7 @@
     const keys = Array.from(document.querySelectorAll('.key'));
     
     // iterate through each element adding the listener
-    keys.forEach(key => {
-      key.addEventListener('transitionend', removeTransition);
-    });
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
     // If a mapped key is pressed, play the associated sound.
     window.addEventListener('keydown', playSound);
