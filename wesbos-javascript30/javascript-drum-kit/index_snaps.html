@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Drum Kit</title>
+  
+  <style>
+    body {
+      margin: 0;
+    }
+    
+    .keys {
+      min-height: 100vh;
+      display: flex;
+      place-content: center;
+      align-items: center;
+    }
+    
+    .key {
+      border: 2px solid rgba(189, 194, 189, 0.438);
+      padding: 30px;
+      margin: 0 10px;
+      font-size: 2rem;
+      border-radius: 10%;
+      transition: ease-in .1s;
+    }
+    
+    .playing {
+      box-shadow: 0px 0px 10px 0px rgba(218, 196, 175, 0.27);
+      background-color: rgba(255, 237, 144, 0.1);
+      transform-origin: center;
+      transform: scale(1.12) rotate(-.01turn);
+      border-bottom: 2px solid rgba(143, 130, 169, 0.423);
+      border-right: 2px solid rgba(143, 130, 169, 0.423);
+      border-top: 2px solid rgba(172, 157, 106, 0.423);
+      border-left: 2px solid rgba(208, 195, 139, 0.423);
+    }
+  </style>
+
+</head>
+<body>
+  
+  <div class="keys">
+
+    <div data-key="65" class="key"><kbd>A</kbd></div>
+    <div data-key="83" class="key"><kbd>S</kbd></div>
+    <div data-key="68" class="key"><kbd>D</kbd></div>
+    <div data-key="70" class="key"><kbd>F</kbd></div>
+    <div data-key="74" class="key"><kbd>J</kbd></div>
+    <div data-key="75" class="key"><kbd>K</kbd></div>
+    <div data-key="76" class="key"><kbd>L</kbd></div>
+    <div data-key="186" class="key"><kbd>;</kbd></div>
+
+    <audio data-key="65" src="snap_sounds/snap-1.wav"></audio>
+    <audio data-key="83" src="snap_sounds/snap-2.wav"></audio>
+    <audio data-key="68" src="snap_sounds/snap-3.wav"></audio>
+    <audio data-key="70" src="snap_sounds/snap-5.wav"></audio>
+    <audio data-key="74" src="snap_sounds/snap-6.wav"></audio>
+    <audio data-key="75" src="snap_sounds/snap-7.wav"></audio>
+    <audio data-key="76" src="snap_sounds/snap-8.wav"></audio>
+    <audio data-key="75" src="snap_sounds/snap-9.wav"></audio>
+    <audio data-key="186" src="snap_sounds/snap-10.wav"></audio>
+  
+  </div>
+  
+  <script>
+
+    function removeTransition(e) {
+      this.classList.remove('playing');
+    };
+    
+    function playSound(e) {
+      
+      // get audio element to play the sound
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+      
+      // get key element to capture key up events and trigger plays.
+      const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+
+      // return if key is not mapped to a sound
+      if (!audio) return;
+
+      // add a playing class to the playing key element
+      key.classList.add('playing');
+
+      // seek playback time to the start so audio triggers again on every click.
+      audio.currentTime = 0;
+    
+      // play audio.
+      audio.play();
+    }
+
+    // get array with all key elements
+    const keys = Array.from(document.querySelectorAll('.key'));
+    
+    // iterate through each element adding the listener
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+    // If a mapped key is pressed, play the associated sound.
+    window.addEventListener('keydown', playSound);
+
+  </script>
+
+</body>
+</html>
