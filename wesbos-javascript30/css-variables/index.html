@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Css Variables</title>
+</head>
+<body>
+
+  <h2>Updating CSS variables <span>with JS</span></h2>
+    
+  <div class="controls">
+
+    <div class="label-container">
+      <label for="spacing">Spacing</label>
+      <input type="range" name="spacing" id="spacing" min="0" max="100" data-measure="px" value="0">
+    </div>
+    
+    <div class="label-container">
+      <label for="blur">Blur</label>
+      <input type="range" name="blur" id="blur" min="0" max="25" data-measure="px" value="0">
+    </div>
+  
+    <div class="label-container">
+      <label for="base">Base</label>
+      <input type="color" name="base" id="base" value="#ff26cc">
+    </div>
+
+  </div>
+
+  <div class="box-container">
+    <div class="box alfa">teste</div>
+    <div class="box beta"></div>
+  </div>
+
+  <style>
+    
+    :root {
+      --base: #ff26cc;
+      --blur: 0px;
+      --spacing: 0px;
+    }
+    
+    html {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;     
+      border: 1px solid red;
+    }
+
+    .controls {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+    }
+
+    .label-container {
+      min-width: 100px;
+      padding: 0 5px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box-container {
+      margin-top: 40px;
+      padding: 40px;
+      display: flex;
+      flex-direction: row;
+      gap: 100px;
+      background-color: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      background-color: #ffffff;
+    }
+
+    .alfa {
+      margin-top: var(--spacing);
+    }
+
+    input {
+      width: 100%;
+    }
+
+  </style>
+  
+  <script>
+
+    function myListenerCallback(evt) {
+
+      // if there is a data-suffix add it, otherwise leave it blank
+      const suffix = this.dataset.measure || '';
+
+      // Update css custom property with new value from input
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    
+    // get all input elements on the page
+    const inputs = document.querySelectorAll('input');    
+
+    // capture change events on eact input
+    inputs.forEach(input => input.addEventListener('change', myListenerCallback));
+    
+    // maybe add a debounce to reduce the number of events fired
+    inputs.forEach(input => input.addEventListener('mousemove', myListenerCallback));
+
+  </script>
+
+</body>
+</html>
