@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Type Ahead</title>
+</head>
+<body>
+    
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+
+  <style>
+    body {
+      display: flex;
+      place-content: center;
+    }
+
+    .search {
+      width: 400px;
+      padding: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .suggestions {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      border: 1px solid red;
+      width: 400px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .city {
+      font-family:'Lucida Sans', sans-serif;
+    }
+    .state {
+      font-family: monospace;
+    }
+    .highlight {
+      background-color: #ffc526;
+    }
+  </style>
+
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+    const cities = [];
+
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then(result => cities.push(...result));
+
+    const searchInput = document.querySelector('.search');
+    const suggestions = document.querySelector('.suggestions');
+
+    function findMatches(wordToMatch, cities) {
+      return cities.filter(place => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return place.city.match(regex) || place.state.match(regex)
+      });
+    }
+
+    function displayResult(e) {
+      const matches = findMatches(this.value, cities);
+      matchesHtml = matches.map(place => {
+
+        const placeRegex = new RegExp(this.value, 'gi');
+        const styledCity = place.city.replace(placeRegex, `<span class="highlight">${this.value}</span>`);
+        const styledState = place.state.replace(placeRegex, `<span class="highlight">${this.value}</span>`);
+
+        return `
+          <li>
+            <span class="name">${styledCity}, ${styledState}</span>
+            <span class="population">${place.population}</span>
+          </li>
+        `
+      }).join('');
+      suggestions.innerHTML = matchesHtml;
+
+    }
+    searchInput.addEventListener('input', displayResult)
+
+  </script>
+</body>
+</html>
