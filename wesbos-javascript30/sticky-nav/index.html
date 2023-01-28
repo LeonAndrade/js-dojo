@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Nav</title>
+
+  <style>
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      font-weight: 200;
+      background-color: #e3e0e0;
+    }
+    
+    header {
+      background-image: url('./background.jpeg');
+      background-position: center;
+      background-size: cover;
+      min-height: 20vh;
+      display: flex;
+      place-content: center;
+      align-items: center;
+      font-size: 3rem;
+      font-weight: 600;
+      color: rgb(255, 255, 255);
+      text-shadow: 4px 4px 0px #555151;
+    }
+
+    nav {
+      background-color: rgb(46, 42, 42);
+      color: white;
+      display: flex;
+      flex-direction: row;
+    }
+
+    nav > * {
+      padding: 1rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    .main-content {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      background-color: white;
+    }
+
+    .main-content p {
+      margin: .4rem 0;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <header>
+    Javascript Dojo
+  </header>
+  <nav id="main-nav">
+      <div>Home</div>
+      <div>About</div>
+      <div>Images</div>
+      <div>Locations</div>
+      <div>Maps</div>
+  </nav>
+
+  <div class="main-content">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet nisl ac ante pulvinar, ut efficitur dolor dictum. Praesent ac magna at nisi convallis molestie a sed metus. Donec non aliquet massa, eu vehicula erat. Phasellus mollis elementum arcu non finibus. Aliquam hendrerit scelerisque neque, vel porta lacus interdum nec. Pellentesque eu est sed mauris vulputate varius. Cras ac mollis ex. Maecenas ut purus tincidunt, lacinia massa id, lacinia quam.
+    </p>
+    <p>
+      Maecenas euismod ante euismod mi dapibus, vel commodo lacus accumsan. Cras tempor est et luctus blandit. Nam interdum velit et nibh venenatis efficitur. Morbi ac convallis metus. Duis vel tristique tortor. Quisque leo ex, pulvinar sed cursus ut, dapibus ut ante. Morbi eget mi ut metus dignissim elementum. Cras fermentum est sit amet dignissim molestie. Morbi tempor metus nec arcu consectetur, at rutrum mauris scelerisque.
+    </p>
+    <p>
+      Mauris at pharetra velit, sed convallis ante. Duis nec sem accumsan, semper massa at, tincidunt elit. Donec sodales commodo pharetra. Ut auctor nunc erat, id suscipit turpis efficitur non. Ut id elit viverra, aliquam sapien sed, sagittis odio. Aenean vel congue eros, at vestibulum lectus. Integer eget arcu nisl. Aenean eu sapien in augue volutpat venenatis vitae eu metus. Aliquam ullamcorper nisl et hendrerit ornare. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+    </p>
+    <p>
+      Quisque molestie est non cursus ultrices. In quam neque, euismod at condimentum vitae, aliquam quis nibh. Etiam blandit velit quis tortor maximus, vel semper nisl euismod. Nam aliquet vel neque et eleifend. Nunc vel nunc tincidunt, feugiat ex a, consequat purus. Nunc faucibus ut lorem a maximus. Donec finibus ipsum at neque tincidunt, vitae venenatis leo faucibus. In sodales ipsum velit, id consequat eros semper a. Aenean vehicula consectetur magna, et tincidunt leo ultricies quis. Integer ac mauris id mi cursus tempus. Cras fermentum, purus eget tempus tristique, est sem feugiat purus, vitae lobortis est orci sed velit. Nunc facilisis sollicitudin varius. Vivamus ut diam vel odio ultricies luctus. Fusce ut dui sit amet augue ornare tincidunt. Cras vel volutpat sapien. Praesent bibendum efficitur nunc, ut convallis mi.
+    </p>
+    <p>
+      Sed a metus vel enim pharetra sodales non quis metus. Sed porta, mi sit amet malesuada venenatis, justo augue sodales leo, vel suscipit odio lacus ut est. Vestibulum tincidunt lacinia velit, vitae varius augue feugiat quis. Aenean vel sem felis. Duis id justo eu eros aliquet volutpat a sit amet mauris. Nunc massa ante, faucibus molestie dignissim id, placerat eget risus. In eu magna in erat ultrices lobortis. Integer quis suscipit justo, tincidunt placerat dui. In eget pretium lorem, id posuere quam. Sed eget mauris a nibh ultricies vehicula. Vivamus tincidunt sed urna vel scelerisque. Nunc at leo lectus.
+    </p>
+  </div>
+
+  <script>
+
+    const nav = document.querySelector('#main-nav');
+    const navTop = nav.offsetTop;
+    
+    function fixNav(e) {
+      console.log(navTop);
+      if (window.scrollY >= navTop) {
+        nav.style.position = 'sticky';
+        nav.style.top = 0;
+      }
+    }
+
+    window.addEventListener('scroll', fixNav)
+
+  </script>
+
+</body>
+</html>
