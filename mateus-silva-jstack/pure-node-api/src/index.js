@@ -58,7 +58,7 @@ const server = http.createServer((request, response) => {
     };
 
     // If method includes an incoming body.
-    if (['POST', 'PUT'].includes(request.method)) {
+    if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
       
       // parse the body and run associated route handler callback
       bodyParser(request, () => route.handler(request, response));

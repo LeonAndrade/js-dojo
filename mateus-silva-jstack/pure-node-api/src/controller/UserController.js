@@ -73,18 +73,22 @@ module.exports = {
     // If an user exists with given id, iterate through users array...
     users = users.map((user) => {
       
-      // ...when user id is matched...
-      if (user.id === id) {
-
-        // ...destructure user into a new object and override name property.
-        return { ...user, name };
-      }
+      // if user id is matched, destructure current user object into a new object and override name property
+      // else return the current user object
+      return user.id === id ? { ...user, name } : user
     });
 
     response.send(200, {id, name});
   },
   
   deleteUser(request, response) {
-    return '';
+    let { id } = request.params;
+  
+    // Cast id from string to number.
+    id = Number(id);
+
+    users = users.filter(user => user.id !== id);
+
+    response.send(200, { deleted: true });
   },
 }
