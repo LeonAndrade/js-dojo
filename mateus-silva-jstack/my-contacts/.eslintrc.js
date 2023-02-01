@@ -12,5 +12,10 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    'class-methods-use-this': 'off',
+    'consistent-return': 'off',
+    'comma-dangle': 'off',
+    camelcase: 'off',
+    'object-curly-newline': 'off',
   },
 };
