@@ -26,4 +26,4 @@ COPY --chown=node:node . .
 EXPOSE 3000
 
 # Run entry point script
-CMD [ "nodemon", "src/index.js" ]
+CMD [ "node_modules/.bin/nodemon", "src/index.js" ]

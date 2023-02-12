@@ -2,15 +2,17 @@ name: my-contacts
 services:
   backend:
     build: ./backend
-    volumes:
-      - ./backend:/my-contacts/backend
-    ports:
-      - "3000:3000"
+    restart: always
     depends_on:
       - database
-    links:
-      - database
-    restart: always
+    volumes:
+      - ./backend:/my-contacts/backend
+      - node_modules:/my-contacts/backend/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
 
   database:
     image: postgres
@@ -29,6 +31,15 @@ services:
         target: /docker-entrypoint-initdb.d/create_tables.sql
         bind:
           create_host_path: true
+    networks:
+      - app-network
     ports:
       - "5432:5432"
     restart: always
+
+volumes:
+  node_modules:
+
+networks:
+  app-network:
+    driver: bridge
