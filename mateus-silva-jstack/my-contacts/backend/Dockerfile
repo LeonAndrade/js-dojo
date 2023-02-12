@@ -1,14 +1,29 @@
 # Set up node version for service image
 FROM node:18-bullseye
 
-# Expose port for internal communication with other services
-EXPOSE 3000
+# Set environment variables
+# ENV NODE_ENV="production"
 
-# Copy all code files to container
-COPY . /mycontacts/backend/.
+# Create an empty node_modules dir and assign node user permissions to project dir
+RUN mkdir -p /mycontacts/backend/node_modules && chown -R node:node /mycontacts/backend
 
 # Set working directory inside container
 WORKDIR /mycontacts/backend
 
+# Copy package files
+COPY ./package*.json ./
+
 # Set node user to prevent running commands as super-user
 USER node
+
+# Install package files
+RUN yarn install
+
+# Bundle app code (maybe use this a volume during development)
+COPY --chown=node:node . .
+
+# Expose bind port for internal communication with other services
+EXPOSE 3000
+
+# Run entry point script
+CMD [ "nodemon", "src/index.js" ]

@@ -24,7 +24,11 @@ services:
         target: /var/lib/postgres/data
         bind:
           create_host_path: true
-      - ./database/initdb:/docker-entrypoint-initdb.d/create_tables.sql
+      - type: bind
+        source: ./database/initdb
+        target: /docker-entrypoint-initdb.d/create_tables.sql
+        bind:
+          create_host_path: true
     ports:
       - "5432:5432"
     restart: always

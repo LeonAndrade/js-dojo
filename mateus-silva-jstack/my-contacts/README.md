@@ -8,8 +8,15 @@ There may be changes from the original content added by myself to play around wi
 
 ## References
 
+### JStack
+
 - jstack course: https://jstack.com.br
-- docker-bench-security: https://github.com/docker/docker-bench-security
-- node docker images: https://github.com/nodejs/docker-node
-- postgres docker images: https://github.com/docker-library/docs/blob/master/postgres/README.md
-- docker compose docs: https://docs.docker.com/compose/compose-file/
+
+### Docker
+
+- [docker-bench-security](https://github.com/docker/docker-bench-security)
+- [node docker images](https://github.com/nodejs/docker-node)
+- [postgres docker images](https://github.com/docker-library/docs/blob/master/postgres/README.md)
+- [docker compose docs](https://docs.docker.com/compose/compose-file/)
+- [running node app in docker](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+- [Digital Ocean: node with docker](https://www.digitalocean.com/community/tutorials/containerizing-a-node-js-application-for-development-with-docker-compose)
