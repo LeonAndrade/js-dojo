@@ -1,7 +1,7 @@
 {
   "name": "my-contacts",
   "version": "1.0.0",
-  "description": "Basic CRUD application from JStack course.",
+  "description": "Backend Service for My Contacts web-app from JStack course.",
   "main": "src/index.js",
   "author": "Mateus Silva",
   "license": "MIT",
