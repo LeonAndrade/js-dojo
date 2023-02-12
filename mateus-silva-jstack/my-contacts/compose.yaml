@@ -2,11 +2,15 @@ name: my-contacts
 services:
   backend:
     build: ./backend
-    working_dir: /my-contacts/backend
     volumes:
       - ./backend:/my-contacts/backend
-    networks:
-      - back-tier
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    links:
+      - database
+    restart: always
 
   database:
     image: postgres
@@ -23,8 +27,4 @@ services:
       - ./database/initdb:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
       - "5432:5432"
-    restart: unless-stoped
-
-
-networks:
-  back-tier: {}
+    restart: always
