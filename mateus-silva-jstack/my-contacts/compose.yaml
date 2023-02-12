@@ -1,21 +1,18 @@
 name: my-contacts
 services:
-  frontend:
-    build: ./ui
-    depends_on:
-      - backend
-      - database
-
   backend:
     build: ./backend
+    working_dir: /my-contacts/backend
+    volumes:
+      - ./backend:/my-contacts/backend
     networks:
       - back-tier
 
   database:
-    image: postgres/latest
+    image: postgres
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: user
+      POSTGRES_PASSWORD: mycontacts_pw
+      POSTGRES_USER: mycontacts_user
       POSTGRES_DB: mycontacts_db
     volumes:
       - type: bind
