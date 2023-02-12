@@ -1,0 +1,33 @@
+name: my-contacts
+services:
+  frontend:
+    build: ./ui
+    depends_on:
+      - backend
+      - database
+
+  backend:
+    build: ./backend
+    networks:
+      - back-tier
+
+  database:
+    image: postgres/latest
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: mycontacts_db
+    volumes:
+      - type: bind
+        source: ./database/data
+        target: /var/lib/postgres/data
+        bind:
+          create_host_path: true
+      - ./database/initdb:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5432:5432"
+    restart: unless-stoped
+
+
+networks:
+  back-tier: {}
