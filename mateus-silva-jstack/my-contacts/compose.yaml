@@ -1,5 +1,7 @@
 name: my-contacts
+
 services:
+  # Backend api for my-contacts web app
   backend:
     build: ./backend
     restart: always
@@ -12,8 +14,7 @@ services:
       - "3000:3000"
     networks:
       - app-network
-
-
+  # Postgres database mounted to local filesystem
   database:
     image: postgres
     environment:
@@ -21,6 +22,7 @@ services:
       POSTGRES_USER: mycontacts_user
       POSTGRES_DB: mycontacts_db
     volumes:
+      # Bind mounts to local filesystem for persistence during local development
       - type: bind
         source: ./database/data
         target: /var/lib/postgres/data
@@ -38,6 +40,7 @@ services:
     restart: always
 
 volumes:
+  # named volume
   node_modules:
 
 networks:
