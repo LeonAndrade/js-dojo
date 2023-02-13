@@ -1,5 +1,4 @@
 const { Client } = require('pg');
-require('dotenv').config();
 
 const {
   DB_HOST, DB_USER, DB_PORT, DB_DATABASE, DB_PASSWORD
