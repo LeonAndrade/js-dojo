@@ -1,17 +1,21 @@
 const { Client } = require('pg');
+require('dotenv').config();
+
+const {
+  DB_HOST, DB_USER, DB_PORT, DB_DATABASE, DB_PASSWORD
+} = process.env;
 
 const client = new Client({
-  host: 'host.docker.internal',
-  port: 5432,
-  user: 'mycontacts_user',
-  password: 'mycontacts_pw',
-  database: 'mycontacts_db'
+  host: DB_HOST,
+  port: DB_PORT,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE
 });
 
 client.connect();
 
 exports.query = async (query, values) => {
   const { rows } = await client.query(query, values);
-  console.log(rows);
   return rows;
 };

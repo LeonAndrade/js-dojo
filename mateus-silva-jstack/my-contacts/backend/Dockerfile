@@ -4,7 +4,7 @@ FROM node:18-bullseye
 # Set environment variables
 # ENV NODE_ENV="production"
 
-# Create an empty node_modules dir and assign node user permissions to project dir
+# Create an empty node_modules dir and assign node user permissions on project dir
 RUN mkdir -p /mycontacts/backend/node_modules && chown -R node:node /mycontacts/backend
 
 # Set working directory inside container
@@ -19,7 +19,7 @@ USER node
 # Install package files
 RUN yarn install
 
-# Bundle app code (maybe use this a volume during development)
+# Bundle app code and assign permissions to node user
 COPY --chown=node:node . .
 
 # Expose bind port for internal communication with other services
