@@ -7,8 +7,14 @@ services:
     build: ./backend
     restart: always
     depends_on:
-      database:
-        condition: service_completed_successfully
+      - database
+    env_file: .env
+    environment:
+      DB_HOST: $DB_HOST
+      DB_PORT: $DB_PORT
+      DB_USER: $DB_USER
+      DB_DATABASE: $DB_DATABASE
+      DB_PASSWORD: $DB_PASSWORD
     volumes:
       - ./backend:/my-contacts/backend
       - node_modules:/my-contacts/backend/node_modules
@@ -20,10 +26,12 @@ services:
   # Postgres database mounted to local filesystem
   database:
     image: postgres
+    restart: always
+    env_file: .env
     environment:
-      POSTGRES_PASSWORD: mycontacts_pw
-      POSTGRES_USER: mycontacts_user
-      POSTGRES_DB: mycontacts_db
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_USER: $DB_USER
+      POSTGRES_DB: $DB_DATABASE
     volumes:
       # Bind mounts to local filesystem for persistence during local development
       - type: bind
@@ -33,14 +41,13 @@ services:
           create_host_path: true
       - type: bind
         source: ./database/initdb
-        target: /docker-entrypoint-initdb.d/create_tables.sql
+        target: /docker-entrypoint-initdb.d
         bind:
           create_host_path: true
     networks:
       - app-network
     ports:
       - "5432:5432"
-    restart: always
 
 volumes:
   # named volume

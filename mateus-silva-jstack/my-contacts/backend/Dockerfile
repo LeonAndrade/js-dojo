@@ -3,6 +3,11 @@ FROM node:18-bullseye
 
 # Set environment variables
 # ENV NODE_ENV="production"
+ENV DB_HOST=$DB_HOST
+ENV DB_PORT=$DB_PORT
+ENV DB_USER=$DB_USER
+ENV DB_DATABASE=$DB_DATABASE
+ENV DB_PASSWORD=$DB_PASSWORD
 
 # Create an empty node_modules dir and assign node user permissions on project dir
 RUN mkdir -p /mycontacts/backend/node_modules && chown -R node:node /mycontacts/backend
