@@ -1,12 +1,14 @@
 name: my-contacts
 
 services:
+
   # Backend api for my-contacts web app
   backend:
     build: ./backend
     restart: always
     depends_on:
-      - database
+      database:
+        condition: service_completed_successfully
     volumes:
       - ./backend:/my-contacts/backend
       - node_modules:/my-contacts/backend/node_modules
@@ -14,6 +16,7 @@ services:
       - "3000:3000"
     networks:
       - app-network
+
   # Postgres database mounted to local filesystem
   database:
     image: postgres
