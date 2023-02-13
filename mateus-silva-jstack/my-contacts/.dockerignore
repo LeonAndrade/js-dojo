@@ -2,3 +2,4 @@
 .eslintrc.js
 *.md
 .git
+docker_inspect

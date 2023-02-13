@@ -36,14 +36,10 @@ services:
       # Bind mounts to local filesystem for persistence during local development
       - type: bind
         source: ./database/data
-        target: /var/lib/postgres/data
-        bind:
-          create_host_path: true
+        target: /var/lib/postgresql/data
       - type: bind
         source: ./database/initdb
         target: /docker-entrypoint-initdb.d
-        bind:
-          create_host_path: true
     networks:
       - app-network
     ports:
