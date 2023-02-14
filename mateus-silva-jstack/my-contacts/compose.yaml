@@ -4,6 +4,7 @@ services:
 
   # Backend api for my-contacts web app
   backend:
+    container_name: backend
     build: ./backend
     restart: always
     depends_on:
@@ -16,8 +17,11 @@ services:
       DB_DATABASE: $DB_DATABASE
       DB_PASSWORD: $DB_PASSWORD
     volumes:
-      - ./backend:/my-contacts/backend
-      - node_modules:/my-contacts/backend/node_modules
+      - type: bind
+        source: ./backend
+        target: /my-contacts/backend
+
+      # - node_modules:/my-contacts/backend/node_modules
     ports:
       - "3000:3000"
     networks:
@@ -45,9 +49,9 @@ services:
     ports:
       - "5432:5432"
 
-volumes:
+# volumes:
   # named volume
-  node_modules:
+  # node_modules:
 
 networks:
   app-network:

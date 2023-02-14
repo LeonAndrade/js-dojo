@@ -20,10 +20,9 @@ let contacts = [
 ];
 
 class ContactRepository {
-  findAll() {
-    return new Promise((resolve) => {
-      resolve(contacts);
-    });
+  async findAll() {
+    const rows = await db.query('SELECT * FROM contacts');
+    return rows;
   }
 
   findById(id) {

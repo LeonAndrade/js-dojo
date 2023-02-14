@@ -1,4 +1,3 @@
 *.log
-node_modules
 .eslint.js
 .git

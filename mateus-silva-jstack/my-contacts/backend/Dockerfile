@@ -10,10 +10,10 @@ ENV DB_DATABASE=$DB_DATABASE
 ENV DB_PASSWORD=$DB_PASSWORD
 
 # Create an empty node_modules dir and assign node user permissions on project dir
-RUN mkdir -p /mycontacts/backend/node_modules && chown -R node:node /mycontacts/backend
+# RUN mkdir -p /mycontacts/backend/node_modules && chown -R node:node /mycontacts/backend
 
 # Set working directory inside container
-WORKDIR /mycontacts/backend
+WORKDIR /my-contacts/backend
 
 # Copy package files
 COPY ./package*.json ./
@@ -22,7 +22,7 @@ COPY ./package*.json ./
 USER node
 
 # Install package files
-RUN yarn install
+# RUN yarn install
 
 # Bundle app code and assign permissions to node user
 COPY --chown=node:node . .

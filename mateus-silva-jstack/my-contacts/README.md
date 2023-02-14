@@ -28,8 +28,8 @@ There may be changes from the original content added by myself to play around wi
 - [npm ci on production builds](https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable)
 - [.env with docker](https://vsupalov.com/override-docker-compose-dot-env/)
 - [.env with docker 2](https://vsupalov.com/docker-arg-env-variable-guide/)
+- [bind mount not updating](https://medium.com/@jonsbun/why-need-to-be-careful-when-mounting-single-files-into-a-docker-container-4f929340834)
 ## Networking
 
 - [Loopback device](https://askubuntu.com/questions/247625/what-is-the-loopback-device-and-how-do-i-use-it)
 - [Docker networking](https://docs.docker.com/desktop/networking/#use-cases-and-workarounds)
--
