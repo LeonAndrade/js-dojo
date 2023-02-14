@@ -14,7 +14,9 @@ There may be changes from the original content added by myself to play around wi
 
 ## Node
 
+- [http status-codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 - [node-postgres](https://node-postgres.com/)
+- [env variables on node](https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786)
 
 ### Docker
 
