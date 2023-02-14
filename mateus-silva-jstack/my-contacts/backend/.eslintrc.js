@@ -17,5 +17,6 @@ module.exports = {
     'comma-dangle': 'off',
     camelcase: 'off',
     'object-curly-newline': 'off',
+    'no-unused-vars': ['error', { argsIgnorePatter: 'next' }]
   },
 };
