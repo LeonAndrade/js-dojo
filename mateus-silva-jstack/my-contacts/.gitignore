@@ -1,3 +1,2 @@
-frontend/
 docker_inspect
-database/
+database/data/
