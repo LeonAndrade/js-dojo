@@ -4,6 +4,7 @@ import defaultTheme from '../../assets/styles/themes/default';
 
 // Components
 import Header from '../Header';
+import ContactsList from '../ContactsList';
 
 // Styles
 import { Container } from './styles';
@@ -14,6 +15,7 @@ function App() {
       <GlobalStyles />
       <Container>
         <Header />
+        <ContactsList />
       </Container>
     </ThemeProvider>
   );
